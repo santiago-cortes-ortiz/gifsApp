@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { GifsModule } from './gifs/gifs.module';
 import { SharedModule } from './shared/shared.module';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
+
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
   imports: [
     BrowserModule,
     SharedModule,
-    GifsModule
+    GifsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

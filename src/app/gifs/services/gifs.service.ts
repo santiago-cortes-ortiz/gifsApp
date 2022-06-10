@@ -12,7 +12,11 @@ export class GifsService {
 
   public resultados: Gif[] = []
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {
+    if(localStorage.getItem('historial')){
+      this._historial = JSON.parse(localStorage.getItem('historial')!);
+    }
+  }
 
   get historial() {
     return [...this._historial];
@@ -23,6 +27,9 @@ export class GifsService {
     if (!this._historial.includes(query)) {
       this._historial.unshift(query);
       this._historial = this._historial.splice(0, 10)
+
+      localStorage.setItem('historial', JSON.stringify(this._historial))
+
     }
     this._http.get<SearchGifsResponse>(`https://api.giphy.com/v1/gifs/search?api_key=${this._apiKey}&q=${query}&limit=25&offset=0&rating=g&lang=en`)
     .subscribe(
